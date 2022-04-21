@@ -43,6 +43,7 @@
                                 'username' => 'myorange',
                                 'twitter' => '@myplaneticket',
                                 'image' => 'img/demo/authors/sunny.png',
+                                'status' => 'active'
                             ],
                             [
                                 'name' => 'Jos',
@@ -52,6 +53,7 @@
                                 'username' => 'Walapa',
                                 'twitter' => '@atlantez',
                                 'image' => 'img/demo/authors/jovanni.png',
+                                'status' => 'active'
                             ],
                             [
                                 'name' => 'Jovanni',
@@ -61,6 +63,7 @@
                                 'username' => 'lodev09',
                                 'twitter' => '@lodev09',
                                 'image' => 'img/demo/authors/roberto.png',
+                                'status' => 'banned'
                             ],
                             [
                                 'name' => 'Roberto',
@@ -70,11 +73,18 @@
                                 'username' => 'sildur',
                                 'twitter' => '@sildur',
                                 'image' => 'img/demo/authors/roberto.png',
+                                'status' => 'banned'
                             ],
                         ];
 
                     ?>
 
+                    <style>
+                        .banned {
+                            opacity: .5;
+                            cursor: not-allowed;
+                        }
+                    </style>
 
 
                     <div class="panel-container show">
@@ -82,7 +92,7 @@
                            <div class="d-flex flex-wrap demo demo-h-spacing mt-3 mb-3">
                                <?php foreach ($programmers as $programmer):?>
 
-                                    <div class="rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0">
+                                    <div class="<?=$programmer['status'] == 'banned' ? 'banned' : '';?> rounded-pill bg-white shadow-sm p-2 border-faded mr-3 d-flex flex-row align-items-center justify-content-center flex-shrink-0">
                                         <img src="<? echo $programmer['image']?>" alt="<? echo $programmer['name']?><? echo $programmer['surname']?>" class="img-thumbnail img-responsive rounded-circle" style="width:5rem; height: 5rem;">
                                         <div class="ml-2 mr-3">
                                             <h5 class="m-0">
