@@ -1,8 +1,7 @@
 <?php
-
+session_start();
 include 'functions.php';
 
-createTask();
 ?>
 
 
@@ -43,6 +42,18 @@ createTask();
 
             <div class="panel-container show">
                 <div class="panel-content">
+                    <?php if(isset($_SESSION['danger'])): ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?=$_SESSION['danger']; unset($_SESSION['msg']);?>
+                        </div>
+                    <?endif;?>
+
+
+                    <?php if(isset($_SESSION['success'])): ?>
+                        <div class="alert alert-success" role="alert">
+                            <?=$_SESSION['success']; unset($_SESSION['msg']);?>
+                        </div>
+                    <?endif;?>
                     <div class="d-flex flex-wrap demo demo-h-spacing mt-3 mb-3">
                         <form action="task_9.php" method="post">
                             <div class="form-group">

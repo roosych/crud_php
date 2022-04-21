@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include 'config.php';
 
 function getPeoples() {
@@ -11,18 +11,32 @@ function getPeoples() {
     return $data;
 }
 
-// Task 9
+// Task 9 + Task 10
 function createTask() {
-    $text = $_POST['text'];
 
-    if(isset($_POST['submit']) && $text != '') {
+    if(isset($_POST['submit'])) {
+        $text = $_POST['text'];
+
         $pdo = new PDO('mysql:host='.MYSQL_SERVER.';dbname='.MYSQL_DBNAME.'', MYSQL_USER, MYSQL_PASS);
-        $sql = 'INSERT INTO tasks (text) VALUES (:text)';
+        $sql = 'SELECT * FROM tasks WHERE text = :text';
         $statement = $pdo->prepare($sql);
         $statement->execute(['text' => $text]);
+        $task = $statement->fetch(PDO::FETCH_ASSOC);
 
-        header('Location: task_9.php');
+        if(!empty($task)) {
+            $msg = 'Такая задача существует!';
+            $_SESSION['danger'] = $msg;
+        } else {
+            $pdo = new PDO('mysql:host='.MYSQL_SERVER.';dbname='.MYSQL_DBNAME.'', MYSQL_USER, MYSQL_PASS);
+            $sql = 'INSERT INTO tasks (text) VALUES (:text)';
+            $statement = $pdo->prepare($sql);
+            $statement->execute(['text' => $text]);
+
+            $msg = 'Задача <strong>"'.$text.'"</strong> создана!';
+            $_SESSION['success'] = $msg;
+        }
+
     }
-
-
 }
+createTask();
+
