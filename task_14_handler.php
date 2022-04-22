@@ -20,20 +20,26 @@ $statement->execute(['email' => $email]);
 $user = $statement->fetch(PDO::FETCH_ASSOC);
 
 // Проверяем наличие пользовтаеля в бд
-if(empty($user)) {
-    $msg = 'Неверный логин или пароль';
-    $_SESSION['error'] = $msg;
-    header('Location: /task_14.php');
-    exit();
-}
+if(!empty($user)) {
 
 // Хешированный пароль записываем в переменную
-$hash = $user['password'];
+    $hash = $user['password'];
 
 // Провереям совпадает ли хэшированный и введенный пароль
-if (password_verify($password, $hash)){
-    $_SESSION['user_email'] = $user['email'];
-    header('Location: task_14.php');
-    exit();
+    if (password_verify($password, $hash)){
+        $_SESSION['user_email'] = $user['email'];
+        header('Location: task_14_1.php');
+        exit();
+    }
 }
+
+// Иначе выдаем ошибку
+$msg = 'Неверный логин или пароль';
+$_SESSION['error'] = $msg;
+unset($_SESSION['user_email']);
+
+header('Location: /task_14.php');
+exit();
+
+
 
