@@ -20,7 +20,7 @@ function register(){
 
             // Проверяем если $user пришел не пустой
             if(!empty($user)) {
-                $msg = 'user est';
+                $msg = 'Пользователь с email-ом <strong>'.$email.'</strong> существует!';
                 $_SESSION['danger'] = $msg;
                 header('Location: task_11.php');
                 exit();
