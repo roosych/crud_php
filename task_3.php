@@ -34,35 +34,23 @@
 
                     <?php
 
-                        $elements = [
+                        $broadcrumbs = [
                             [
-                                'title' => 'My Tasks',
-                                'value' => '130 /500',
-                                'valuenow' => '65',
-                                'width' => '65%',
-                                'background' => 'bg-fusion-400'
+                                'title' => 'Home',
+                                'url' => '#',
+                                'is_link' => true,
                             ],
                             [
-                                'title' => 'Transfered',
-                                'value' => '440 TB',
-                                'valuenow' => '34',
-                                'width' => '34%',
-                                'background' => 'bg-success-500'
+                                'title' => 'PHP',
+                                'url' => '#',
+                                'is_link' => true,
                             ],
                             [
-                                'title' => 'Bugs Squashed',
-                                'value' => '77%',
-                                'valuenow' => '77',
-                                'width' => '77%',
-                                'background' => 'bg-info-400'
+                                'title' => 'Functions',
+                                'url' => '#',
+                                'is_link' => false,
                             ],
-                            [
-                                'title' => 'User Testing',
-                                'value' => '7 days',
-                                'valuenow' => '84',
-                                'width' => '84%',
-                                'background' => 'bg-primary-300'
-                            ],
+
                         ];
 
                     ?>
@@ -71,18 +59,20 @@
                     <div class="panel-container show">
                         <div class="panel-content">
 
-                            <?php
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <?php foreach ($broadcrumbs as $item):?>
+                                            <?php
+                                                if($item['is_link']) { ?>
+                                                    <li class="breadcrumb-item"><a href="<?=$item['url']?>"><?=$item['title']?></a></li>
+                                                <? } else { ?>
+                                                    <li class="breadcrumb-item active"><?=$item['title']?></li>
+                                                <? }
+                                            ?>
+                                        <?endforeach;?>
 
-                                foreach ($elements as $element):?>
-
-                                    <div class="d-flex mt-2">
-                                        <? echo $element['title']?>
-                                        <span class="d-inline-block ml-auto"><? echo $element['value']?></span>
-                                    </div>
-                                    <div class="progress progress-sm mb-3">
-                                        <div class="progress-bar <? echo $element['background']?>" role="progressbar" style="width: <? echo $element['width']?>;" aria-valuenow="<? echo $element['valuenow']?>" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                <?endforeach;?>
+                                    </ol>
+                                </nav>
 
                         </div>
                     </div>
