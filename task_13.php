@@ -38,11 +38,18 @@ session_start();
                     <div class="panel-content">
                         <div class="form-group">
                             <div class="alert alert-info fade show" role="alert">
-                                Кнопка была нажата: <b><?=$_SESSION['counter']?></b> раз
+
+                                Кнопка была нажата: <b><?= (int) $_SESSION['counter']?></b> раз
                             </div>
-                            <form action="task_13_handler.php" method="post">
-                                <button type="submit" class="btn btn-success mt-3">Submit</button>
-                            </form>
+                            <div class="row">
+                                <form action="task_13_handler.php" method="post">
+                                    <button type="submit" class="btn btn-success mt-3 mx-1">Click</button>
+                                </form>
+                                <form action="task_13_1_handler.php" method="post">
+                                    <button type="submit" class="btn btn-warning mt-3 mx-1">Reset</button>
+                                </form>
+                            </div>
+
                         </div>
                     </div>
                 </div>

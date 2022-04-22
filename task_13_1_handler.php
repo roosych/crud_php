@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-$_SESSION['counter'] = (int)$_SESSION['counter'] + 1;
+unset($_SESSION['counter']);
 
 header('Location: task_13.php');
-
